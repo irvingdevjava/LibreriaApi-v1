@@ -8,6 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 
@@ -17,7 +19,10 @@ public class BookModel implements Serializable{
     private static final long serialVersionUID=1L;
 
 
-   
+    //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @ManyToOne//(fetch = FetchType.LAZY)
+    @JoinColumn(name="publisher_id")
+    private PublisherModel publisher;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -45,5 +50,15 @@ public class BookModel implements Serializable{
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public PublisherModel getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(PublisherModel publisher) {
+        this.publisher = publisher;
+    }
+
+    
 
 }
