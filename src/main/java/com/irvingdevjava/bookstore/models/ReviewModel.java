@@ -3,11 +3,15 @@ package com.irvingdevjava.bookstore.models;
 import java.io.Serializable;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 
@@ -15,6 +19,11 @@ import jakarta.persistence.Table;
 @Table(name="TB_REVIEW")
 public class ReviewModel implements Serializable {
     private static final long serialVersionUID=1L;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToOne
+    @JoinColumn(name="book_id")
+    private BookModel book;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -43,6 +52,15 @@ public class ReviewModel implements Serializable {
         this.comment = comment;
     }
 
+    public BookModel getBook() {
+        return book;
+    }
+
+    public void setBook(BookModel book) {
+        this.book = book;
+    }
+
+    
 
     
 
