@@ -22,9 +22,7 @@ import jakarta.persistence.Table;
 public class AuthorModel implements Serializable {
         private static final long serialVersionUID=1L;
 
-        @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-        @ManyToMany(mappedBy = "authors", fetch= FetchType.LAZY)
-        private Set<BookModel> book=new HashSet<>();
+        
 
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
@@ -32,6 +30,10 @@ public class AuthorModel implements Serializable {
 
         @Column(nullable = false, unique = true)
         private String name;
+
+        @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+        @ManyToMany(mappedBy = "authors", fetch= FetchType.LAZY)
+        private Set<BookModel> books=new HashSet<>();
 
         public static long getSerialversionuid() {
             return serialVersionUID;
@@ -53,13 +55,15 @@ public class AuthorModel implements Serializable {
             this.name = name;
         }
 
-        public Set<BookModel> getBook() {
-            return book;
+        public Set<BookModel> getBooks() {
+            return books;
         }
 
-        public void setBook(Set<BookModel> book) {
-            this.book = book;
+        public void setBooks(Set<BookModel> books) {
+            this.books = books;
         }
+
+      
         
 
 

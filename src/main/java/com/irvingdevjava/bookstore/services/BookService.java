@@ -29,7 +29,7 @@ public class BookService {
     }
 
     @Transactional
-    public BookModel saveModel(BookRecordDto bookRecordDto){
+    public BookModel saveBook(BookRecordDto bookRecordDto){
         BookModel book = new BookModel();
         book.setTitle(bookRecordDto.title());
         book.setPublisher(publisherRepository.findById(bookRecordDto.publisherId()).get());
