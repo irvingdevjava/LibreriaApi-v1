@@ -1,5 +1,7 @@
 package com.irvingdevjava.bookstore.services;
 
+import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -26,6 +28,17 @@ public class BookService {
         this.bookRepository = bookRepository;
         this.authorRepository = authorRepository;
         this.publisherRepository = publisherRepository;
+    }
+
+
+    public List<BookModel> getAllBooks(){
+        return bookRepository.findAll();
+    }
+
+    @Transactional
+    public void deleteBook(UUID id){
+        bookRepository.deleteById(id);
+        
     }
 
     @Transactional
